@@ -4,6 +4,7 @@ import com.musics.model.Artista;
 import com.musics.model.Musica;
 import com.musics.model.TipoArtista;
 import com.musics.repository.ArtistaRepository;
+import com.musics.service.ConsultaChatGPT;
 
 import java.util.List;
 import java.util.Optional;
@@ -100,13 +101,21 @@ public class Principal {
 
     private void listarMusicas() {
         List<Artista> artistas = artistaRepository.findAll();
-        artistas.forEach(System.out::println);
+        artistas.forEach(a -> a.getMusicas().forEach(System.out::println));
     }
 
     private void buscarMusicasPorArtista() {
+        System.out.println("Buscar músicas de que artistas ?");
+        var nome = leitura.nextLine();
+        List<Musica> musicas = artistaRepository.buscaMusicasPorArtista(nome);
+        musicas.forEach(System.out::println);
     }
 
     private void pesquisarDadosDoArtista() {
+        System.out.println("Pesquisar dados sobre qual artista ?");
+        var nome = leitura.nextLine();
+        var resposta = ConsultaChatGPT.obterInformacao(nome);
+        System.out.println(resposta.trim());
     }
 }
 

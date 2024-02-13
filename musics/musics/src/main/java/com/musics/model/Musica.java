@@ -47,7 +47,7 @@ public class Musica {
 
     @Override
     public String toString() {
-        return "Musica=' " + titulo + '\'' +
+        return "Musica='" + titulo + '\'' +
                 ", artista= " + artista.getNome();
     }
 }
